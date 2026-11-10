@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Proprietary-red.svg" alt="License: Proprietary"></a>
   <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-lightgrey.svg" alt="Platform">
   <img src="https://img.shields.io/badge/Harnesses-Claude%20%7C%20Agy%20%7C%20OpenCode%20%7C%20Codex-orange.svg" alt="Harnesses">
   <a href="https://agensi.io"><img src="https://img.shields.io/badge/Agensi-Verified%20Skill-brightgreen.svg" alt="Agensi"></a>
