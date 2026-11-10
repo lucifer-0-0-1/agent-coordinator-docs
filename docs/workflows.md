@@ -27,18 +27,24 @@ The coordinator automatically creates:
 
 ## 2. Dispatch a Single Background Task
 
-Offload a specific feature, bugfix, or test suite to an autonomous worker:
+Offload a specific feature, bugfix, or test suite to an autonomous worker (default: `claude`):
 
 ### Conversational Prompt
-> *"Have agy implement the CAN frame decoder in `src/can/parser.c` with tests in `tests/test_parser.py`. Ensure all unit tests pass."*
+> *"Dispatch authentication middleware refactoring with unit tests to claude in an isolated worktree."*
 
 ### CLI Equivalent
 ```bash
-coord dispatch "Implement CAN frame parser" \
-  --agent agy \
-  --files "src/can/parser.c,tests/test_parser.py" \
-  --criteria "pytest tests/test_parser.py" \
+# Default dispatch (runs with Claude Code in isolated worktree)
+coord dispatch "Refactor auth middleware" \
+  --files "src/auth.py,tests/test_auth.py" \
+  --criteria "pytest tests/test_auth.py" \
   --timeout 0
+
+# Or target a specific harness (e.g. OpenAI Codex for algorithmic functions)
+coord dispatch "Optimize query generator" \
+  --agent codex \
+  --files "server/query.py,tests/test_query.py" \
+  --criteria "pytest tests/test_query.py"
 ```
 
 ---
@@ -48,13 +54,14 @@ coord dispatch "Implement CAN frame parser" \
 Run multiple independent tasks simultaneously across different agents without working-tree collisions:
 
 ### Conversational Prompt
-> *"Divide this feature into three tasks: have agy implement the backend API, have opencode scaffold the React dashboard, and have claude write end-to-end tests. Run them in parallel."*
+> *"Divide this feature into four tasks: have agy implement the backend API, have opencode scaffold the React dashboard, have codex generate database migrations, and have claude write end-to-end tests. Run them in parallel."*
 
 ### CLI Equivalent
 ```bash
 coord parallel \
   --task "Build backend API:agy:server/api.py:pytest tests/test_api.py" \
   --task "Scaffold React Dashboard:opencode:ui/Dashboard.tsx:npm run build" \
+  --task "Generate DB migrations:codex:db/migrations.sql:python3 db/verify.py" \
   --task "Author integration tests:claude:tests/test_e2e.py:pytest tests/test_e2e.py" \
   --auto-merge
 ```

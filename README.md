@@ -16,38 +16,39 @@ It enables **parallel multi-agent development and background task offloading acr
 * 🚀 [Getting Started & Installation](docs/getting-started.md) — How to set up the CLI and connect via MCP (Claude Code, Antigravity, OpenCode, Cursor, Windsurf).
 * 🏛 [Architecture & Token Economy](docs/architecture.md) — The Watcher-Implementer model, Git worktrees, and how deterministic orchestration saves 85–95% of inspection tokens.
 * 💡 [Workflows & Prompting Guide](docs/workflows.md) — Real-world prompting examples for TDD, multi-agent parallel execution, GPU gating, and automated review guidance loops.
-* 🔌 [MCP Tool Reference](docs/mcp-tools.md) — API specification for all 9 native `coord_*` MCP tools.
+* 🔌 [MCP Tool Reference](docs/mcp-tools.md) — API specification for all 10 native `coord_*` MCP tools.
 * 🛠 [CLI Reference](docs/cli-reference.md) — Complete cheat sheet for terminal commands and options.
 * ❓ [Frequently Asked Questions (FAQ)](docs/faq.md) — Common questions regarding timeouts, non-git directories, GPU resource handling, and skill composition.
 * 📋 [TASK_REPORT Schema](schemas/task-report-schema.json) — Standard JSON Schema for the worker completion report.
 
 ---
 
-## 🏛 Core Philosophy: The Watcher-Implementer Model
+## 🏛 Core Philosophy: Dynamic Master-Worker Model
 
 ```
-                    DEVELOPER / WATCHER (Claude Code)
-                     Architect · Reviewer · Orchestrator
-                                      │
-         ┌────────────────────────────┼────────────────────────────┐
-         ▼                            ▼                            ▼
-  ANTIGRAVITY (`agy`)          OPENCODE (`opencode`)         CODEX (`codex`)
- (Gemini 3.8 Flash / Pro)      (Free / Custom Models)        (OpenAI Codex)
-         │                            │                            │
-Worktree 1 (Isolated)        Worktree 2 (Isolated)        Worktree 3 (Isolated)
-`agent/agy/<task-id>`      `agent/opencode/<task-id>`    `agent/codex/<task-id>`
-         │                            │                            │
-         └────────────────────────────┼────────────────────────────┘
-                                      ▼
-                          Compact TASK_REPORT.json
-                                      │
-                                      ▼
-                      Diff Review & Clean Merge by Watcher
+                    ACTIVE HARNESS (Master / Watcher)
+              (Claude Code · Antigravity · OpenCode · Codex)
+                     Architect · Planner · Reviewer
+                                   │
+         ┌─────────────────────────┼─────────────────────────┐
+         ▼                         ▼                         ▼
+   WORKER HARNESS            WORKER HARNESS            WORKER HARNESS
+   (e.g. Antigravity)        (e.g. OpenCode)           (e.g. Codex)
+  Gemini 3.8 / Pro GPU       Zero-Cost / Free          OpenAI Models
+         │                         │                         │
+Worktree 1 (Isolated)     Worktree 2 (Isolated)     Worktree 3 (Isolated)
+`agent/<worker>/<id>`     `agent/<worker>/<id>`     `agent/<worker>/<id>`
+         │                         │                         │
+         └─────────────────────────┼─────────────────────────┘
+                                   ▼
+                       Compact TASK_REPORT.json
+                                   │
+                                   ▼
+                   Diff Review & Clean Merge by Master
 ```
 
-1. **Role Specialization:**
-   * **Claude Code = Watcher, Architect, and Guide:** Maintains macro architectural context, reviews diffs, and guides background agents.
-   * **Antigravity, OpenCode, & Codex = Autonomous Implementers:** Handle heavy code generation, test suites, builds, and GPU workloads in isolated workspaces.
+1. **Dynamic Master-Worker Roles:**
+   * Any harness can be the **Master** (Architect/Reviewer) or **Worker** (Implementer/Reporter). Claude Code is the primary default, with instant offloading to Antigravity (for 1M+ context/GPU), OpenCode (for free/local models), or Codex (for OpenAI code synthesis).
 2. **Working-Tree Protection:**
    * Autonomous worker agents execute in dedicated Git worktrees (`.coordinator/worktrees/<task-id>`) on isolated branches (`agent/<agent>/<task-id>`). Your active workspace, unstaged files, and Git index are **100% untouched**.
 3. **Zero Token Waste:**
