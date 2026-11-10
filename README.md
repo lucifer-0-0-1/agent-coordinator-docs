@@ -2,10 +2,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Platform: Linux | macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-lightgrey.svg)](https://github.com/)
-[![Harnesses: Claude Code | Antigravity | OpenCode](https://img.shields.io/badge/Harnesses-Claude%20%7C%20Agy%20%7C%20OpenCode-orange.svg)](https://github.com/)
+[![Harnesses: Claude Code | Antigravity | OpenCode | Codex](https://img.shields.io/badge/Harnesses-Claude%20%7C%20Agy%20%7C%20OpenCode%20%7C%20Codex-orange.svg)](https://github.com/)
 [![Agensi: Verified Skill](https://img.shields.io/badge/Agensi-Verified%20Skill-brightgreen.svg)](https://agensi.io)
 
-**Agent Coordinator** is a lightweight, deterministic multi-agent harness that connects **Claude Code**, Google **Antigravity (`agy`)**, and **OpenCode (`opencode`)**.
+**Agent Coordinator** is a lightweight, deterministic multi-agent harness that connects **Claude Code**, Google **Antigravity (`agy`)**, **OpenCode (`opencode`)**, and **OpenAI Codex (`codex`)**.
 
 It enables **parallel multi-agent development and background task offloading across any combination of agents with zero token waste**, strictly protecting active working directories from interference.
 
@@ -29,15 +29,15 @@ It enables **parallel multi-agent development and background task offloading acr
                     DEVELOPER / WATCHER (Claude Code)
                      Architect · Reviewer · Orchestrator
                                       │
-                 ┌────────────────────┴────────────────────┐
-                 ▼                                         ▼
-         ANTIGRAVITY (`agy`)                      OPENCODE (`opencode`)
-      (Gemini 3.8 Flash / Pro)                  (Free / Custom Models)
-                 │                                         │
-        Worktree 1 (Isolated)                     Worktree 2 (Isolated)
-       `agent/agy/<task-id>`                    `agent/opencode/<task-id>`
-                 │                                         │
-                 └────────────────────┬────────────────────┘
+         ┌────────────────────────────┼────────────────────────────┐
+         ▼                            ▼                            ▼
+  ANTIGRAVITY (`agy`)          OPENCODE (`opencode`)         CODEX (`codex`)
+ (Gemini 3.8 Flash / Pro)      (Free / Custom Models)        (OpenAI Codex)
+         │                            │                            │
+Worktree 1 (Isolated)        Worktree 2 (Isolated)        Worktree 3 (Isolated)
+`agent/agy/<task-id>`      `agent/opencode/<task-id>`    `agent/codex/<task-id>`
+         │                            │                            │
+         └────────────────────────────┼────────────────────────────┘
                                       ▼
                           Compact TASK_REPORT.json
                                       │
@@ -47,7 +47,7 @@ It enables **parallel multi-agent development and background task offloading acr
 
 1. **Role Specialization:**
    * **Claude Code = Watcher, Architect, and Guide:** Maintains macro architectural context, reviews diffs, and guides background agents.
-   * **Antigravity & OpenCode = Autonomous Implementers:** Handle heavy code generation, test suites, builds, and GPU workloads in isolated workspaces.
+   * **Antigravity, OpenCode, & Codex = Autonomous Implementers:** Handle heavy code generation, test suites, builds, and GPU workloads in isolated workspaces.
 2. **Working-Tree Protection:**
    * Autonomous worker agents execute in dedicated Git worktrees (`.coordinator/worktrees/<task-id>`) on isolated branches (`agent/<agent>/<task-id>`). Your active workspace, unstaged files, and Git index are **100% untouched**.
 3. **Zero Token Waste:**
