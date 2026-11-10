@@ -54,6 +54,7 @@ Worktree 1 (Isolated)     Worktree 2 (Isolated)     Worktree 3 (Isolated)
 3. **Zero Token Waste:**
    * Worktree lifecycle management, process monitoring, GPU polling, and branch merging are handled deterministically via Python (**0 LLM tokens**).
    * Workers return a compact ~100-token `TASK_REPORT.json` rather than transferring large multi-turn conversation logs.
+   * Explicit model pinning in prompts prevents background agents from wasting tokens on model-discovery queries.
 
 ---
 

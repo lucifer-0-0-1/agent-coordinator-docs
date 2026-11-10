@@ -37,6 +37,16 @@ Worktree 1 (Isolated)     Worktree 2 (Isolated)     Worktree 3 (Isolated)
 | **OpenCode (`opencode`)** | Multi-model freedom, zero token cost (local/free tiers) | High-volume boilerplate, documentation, unit test scaffolding | Worker / Implementer |
 | **OpenAI Codex (`codex`)** | Fast code synthesis, Python/JS scripting | Algorithmic implementations, script generation, focused functions | Worker / Implementer |
 
+### Model Specification & Token Conservation
+
+When dispatching tasks to worker harnesses, **always specify the intended model directly in the task prompt or ensure it is pre-configured in the harness environment**:
+* **The Token Cost of Omission:** If the worker agent is invoked without an explicit model prompt, it often spawns exploratory subagents or queries installed providers and local configuration files (`~/.config/...`, environment variables) to choose an LLM engine. This exploratory discovery can consume 2,000–5,000 tokens before actual task execution begins.
+* **Best Practice:** Prompt with clear model targets:
+  - *Claude:* `"Refactor auth module using claude-3-7-sonnet..."`
+  - *Antigravity:* `"Run model benchmark using gemini-2.5-pro..."`
+  - *OpenCode:* `"Scaffold endpoints using deepseek-chat..."`
+  - *Codex:* `"Optimize query planner using o3-mini..."`
+
 ---
 
 ## 2. Worktree & Workspace Isolation

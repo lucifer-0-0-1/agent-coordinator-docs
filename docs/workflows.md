@@ -35,18 +35,21 @@ Offload a specific feature, bugfix, or test suite to an autonomous worker (defau
 ### CLI Equivalent
 ```bash
 # Default dispatch (runs with Claude Code in isolated worktree)
-coord dispatch "Refactor auth middleware" \
+coord dispatch "Refactor auth middleware using claude-3-7-sonnet" \
   --files "src/auth.py,tests/test_auth.py" \
   --criteria "pytest tests/test_auth.py" \
   --timeout 0
 
 # Or target a specific harness (e.g. OpenAI Codex for algorithmic functions)
-coord dispatch "Optimize query generator" \
+coord dispatch "Optimize query generator using o3-mini" \
   --agent codex \
   --files "server/query.py,tests/test_query.py" \
   --criteria "pytest tests/test_query.py" \
   --timeout 0
 ```
+
+> **💡 Best Practice: Explicit Model Prompting**  
+> Mention the specific LLM model directly in the task description (e.g., `using claude-3-7-sonnet`, `using gemini-2.5-pro`, `using deepseek-chat`, or `using o3-mini`). If omitted, the background worker agent may waste exploratory tokens and time probing local config files and testing provider fallbacks before beginning implementation.
 
 ---
 
