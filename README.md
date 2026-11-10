@@ -1,9 +1,15 @@
 # Agent Coordinator: Multi-Agent Parallel Orchestrator
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Platform: Linux | macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-lightgrey.svg)](https://github.com/)
-[![Harnesses: Claude Code | Antigravity | OpenCode | Codex](https://img.shields.io/badge/Harnesses-Claude%20%7C%20Agy%20%7C%20OpenCode%20%7C%20Codex-orange.svg)](https://github.com/)
-[![Agensi: Verified Skill](https://img.shields.io/badge/Agensi-Verified%20Skill-brightgreen.svg)](https://agensi.io)
+<p align="center">
+  <img src="assets/logo.png" alt="Agent Coordinator Logo" width="180" height="180" style="border-radius: 24px;">
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-lightgrey.svg" alt="Platform">
+  <img src="https://img.shields.io/badge/Harnesses-Claude%20%7C%20Agy%20%7C%20OpenCode%20%7C%20Codex-orange.svg" alt="Harnesses">
+  <a href="https://agensi.io"><img src="https://img.shields.io/badge/Agensi-Verified%20Skill-brightgreen.svg" alt="Agensi"></a>
+</p>
 
 **Agent Coordinator** is a lightweight, deterministic multi-agent harness that connects **Claude Code**, Google **Antigravity (`agy`)**, **OpenCode (`opencode`)**, and **OpenAI Codex (`codex`)**.
 
