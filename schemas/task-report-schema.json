@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TaskReport",
+  "description": "Standardized completion report emitted by autonomous worker agents upon task completion.",
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "description": "Unique identifier for the task, typically matching the worktree directory name."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["completed", "failed", "in_progress", "blocked"],
+      "description": "Final execution status of the task."
+    },
+    "summary": {
+      "type": "string",
+      "description": "A concise, high-level summary of what was implemented or resolved."
+    },
+    "files_modified": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of existing files modified during the task."
+    },
+    "files_created": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of new files created during the task."
+    },
+    "tests_run": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Commands or test suites executed to verify the implementation."
+    },
+    "tests_passed": {
+      "type": "boolean",
+      "description": "True if all test suites exited with code 0."
+    },
+    "git_commit": {
+      "type": "string",
+      "description": "The git commit hash created on the task branch."
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Additional notes, edge cases handled, or follow-up suggestions for the Watcher."
+    }
+  },
+  "required": [
+    "task_id",
+    "status",
+    "summary",
+    "files_modified",
+    "files_created",
+    "tests_run",
+    "tests_passed"
+  ],
+  "additionalProperties": false
+}
