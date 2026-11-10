@@ -16,26 +16,26 @@ This guide walks you through installing Agent Coordinator and registering it as 
 
 ---
 
-## 2. Installation
+## 2. Installation & Setup
 
-### From Agensi.io (Skill Marketplace)
-If you acquired the skill package on Agensi:
-1. Connect your agent to the Agensi MCP endpoint (`mcp.agensi.io`).
-2. Load the `agent-coordinator` skill directly within your agent session.
+### Acquisition via Agensi Marketplace
+Agent Coordinator is distributed as a verified skill package on **[Agensi.io](https://agensi.io)**.
 
-### Manual Installation via PIP
-To install the standalone CLI tools (`coord`, `coord-mcp`, `agent-coordinator`):
+1. Download the verified `agent-coordinator.zip` skill package from your Agensi dashboard.
+2. Unzip into your AI agent's skill directory (e.g. `~/.claude/skills/` or `~/.gemini/antigravity-cli/skills/`):
+   ```bash
+   unzip agent-coordinator.zip -d ~/.claude/skills/
+   ```
+3. Run the automated local installer script inside the extracted skill folder:
+   ```bash
+   bash ~/.claude/skills/agent-coordinator/scripts/install-coordinator.sh
+   ```
+   This automatically creates and links `coord`, `agent-coordinator`, and `coord-mcp` into your `~/.local/bin/`.
 
-```bash
-# Clone the package or extract the skill zip:
-cd agent-coordinator
-pip install -e .
-```
-
-Verify that the CLI is accessible:
-```bash
-coord status
-```
+4. Verify that the CLI is accessible:
+   ```bash
+   coord status
+   ```
 
 ---
 
