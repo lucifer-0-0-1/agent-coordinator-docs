@@ -47,6 +47,17 @@ When dispatching tasks to worker harnesses, **always specify the intended model 
   - *OpenCode:* `"Scaffold endpoints using deepseek-chat..."`
   - *Codex:* `"Optimize query planner using o3-mini..."`
 
+### Automatic Default Model Fallbacks
+
+If no model is explicitly specified in the prompt or `--model` parameter, each harness automatically applies its pre-configured default model:
+
+| Harness | Default Fallback Model | Override Environment Variable |
+|---|---|---|
+| **Claude Code (`claude`)** | `claude-3-7-sonnet` | `CLAUDE_MODEL` |
+| **Antigravity (`agy`)** | `gemini-3.8-flash-high` | `AGY_MODEL` |
+| **OpenCode (`opencode`)** | `openrouter/openrouter/free` | `OPENCODE_MODEL` |
+| **OpenAI Codex (`codex`)** | `o3-mini` | `CODEX_MODEL` |
+
 ---
 
 ## 2. Worktree & Workspace Isolation

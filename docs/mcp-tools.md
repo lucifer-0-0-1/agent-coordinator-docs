@@ -24,6 +24,7 @@ Dispatches an autonomous implementation task to a background worker in an isolat
 * **Parameters:**
   * `task` *(string, required)*: Clear implementation task description.
   * `agent` *(string, enum: ["claude", "agy", "opencode", "codex"], default: "claude")*: Harness to execute the task.
+  * `model` *(string, optional)*: Specific LLM model to use (falls back to each harness's default model: `claude-3-7-sonnet` for claude, `gemini-3.8-flash-high` for agy, `openrouter/openrouter/free` for opencode, `o3-mini` for codex).
   * `files` *(array of strings or comma-separated string, optional)*: Files assigned to this task.
   * `criteria` *(array of strings or comma-separated string, optional)*: Success criteria and test commands (e.g. "pytest tests/").
   * `branch_name` *(string, optional)*: Custom Git branch name.
