@@ -44,7 +44,8 @@ coord dispatch "Refactor auth middleware" \
 coord dispatch "Optimize query generator" \
   --agent codex \
   --files "server/query.py,tests/test_query.py" \
-  --criteria "pytest tests/test_query.py"
+  --criteria "pytest tests/test_query.py" \
+  --timeout 0
 ```
 
 ---
