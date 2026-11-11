@@ -81,4 +81,5 @@ coord parallel \
 
 * **Marketplace Listing:** Available as an agent skill on [Agensi.io](https://agensi.io).
 * **Issues & Questions:** Please open an issue in this repository for questions, feedback, or bug reports.
-* **License:** [MIT License](LICENSE).
+* **License:** [Commercial](LICENSE).
+* Support by starring the repo in GitHub. Thank You.
